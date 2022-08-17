@@ -2,12 +2,7 @@ import React, { useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import phaserGame from "./PhaserGame";
-import HelloWorldScene from "./scenes/HelloWorldScene";
-
-const handleClick = () => {
-  const scene = phaserGame.scene.keys.helloworld as HelloWorldScene;
-  scene.createEmitter();
-};
+import Preloader from "./scenes/Preloader";
 
 function App() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -26,21 +21,16 @@ function App() {
     renderLoop();
   }, []);
 
+  useEffect(() => {
+    const scene = phaserGame.scene.keys.game as Preloader;
+
+    scene.scene.add("preloader", new Preloader(), true);
+    return () => {};
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <div
-          ref={ref}
-          style={{
-            backgroundColor: "purple",
-            fontSize: 30,
-            color: "wheat",
-          }}
-        />
-        <button className="App-button" onClick={handleClick}>
-          Or click me
-        </button>
-      </header>
+    <div className="bg-purple-400 h-screen p-4">
+      {/* <div className="mt-2" id="game"></div> */}
     </div>
   );
 }

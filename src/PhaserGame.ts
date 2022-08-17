@@ -1,23 +1,27 @@
-import Phaser from 'phaser'
+import Phaser from "phaser";
 
-import HelloWorldScene from './scenes/HelloWorldScene'
+import Preloader from "./scenes/Preloader";
+import Game from "./scenes/Game";
+import GameUI from "./scenes/GameUI";
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
-  parent: 'phaser-container',
-  backgroundColor: '#282c34',
-  scale: {
-    mode: Phaser.Scale.ScaleModes.RESIZE,
-    width: window.innerWidth,
-    height: window.innerHeight,
-  },
+  parent: "game",
+  width: 400,
+  height: 250,
   physics: {
-    default: 'arcade',
+    default: "arcade",
     arcade: {
-      gravity: { y: 200 },
+      gravity: { y: 0 },
+      debug: false,
     },
   },
-  scene: [HelloWorldScene],
-}
+  scene: [Preloader, Game, GameUI],
+  scale: {
+    zoom: 2,
+  },
+};
 
-export default new Phaser.Game(config)
+const phaserGame = new Phaser.Game(config);
+
+export default phaserGame;
