@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import Chest from "../items/Chest";
 
 import { sceneEvents } from "../events/EventsCenter";
+import useGlobalstore from "../utils/useGlobal";
 
 declare global {
   namespace Phaser.GameObjects {
@@ -83,6 +84,11 @@ export default class Faune extends Phaser.Physics.Arcade.Sprite {
   }
 
   private throwKnife() {
+    console.log("Throw");
+    useGlobalstore.setState({
+      navigate: `knife - ${Math.floor(Math.random() * 20)}`,
+    });
+
     if (!this.knives) {
       return;
     }

@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import phaserGame from "./PhaserGame";
-import Preloader from "./scenes/Preloader";
+import { useEffect, useRef } from "react";
+import { config } from "./PhaserGame";
+import useGlobalstore from "./utils/useGlobal";
 
 function App() {
   const ref = useRef<HTMLDivElement | null>(null);
+  const data = useGlobalstore((s) => s.navigate);
 
   useEffect(() => {
     let lastCalledTime = Date.now();
@@ -22,15 +21,22 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const scene = phaserGame.scene.keys.game as Preloader;
+    const game = new Phaser.Game(config);
 
-    scene.scene.add("preloader", new Preloader(), true);
-    return () => {};
-  });
+    return () => {
+      game.destroy(true);
+    };
+  }, []);
 
   return (
-    <div className="bg-purple-400 h-screen p-4">
-      {/* <div className="mt-2" id="game"></div> */}
+    <div className="bg-green-400 text-lg h-screen w-screen flex flex-row">
+      <div className="w-52 h-screen bg-purple-500">{data}</div>
+      <div className="w-52 h-screen bg-purple-100">
+        {/* {useBound.getState().navigate} */}
+      </div>
+      <div className="mt-10  ">
+        <div id="game" />
+      </div>
     </div>
   );
 }

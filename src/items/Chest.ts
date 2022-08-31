@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { getGlobalState, setGlobalState } from "../utils/useGlobal";
+import useGlobalstore from "../utils/useGlobal";
 
 export default class Chest extends Phaser.Physics.Arcade.Sprite {
   constructor(
@@ -16,12 +16,12 @@ export default class Chest extends Phaser.Physics.Arcade.Sprite {
 
   open() {
     if (this.anims.currentAnim.key !== "chest-closed") {
-      console.log(getGlobalState().navigate);
+      console.log(useGlobalstore.getState().navigate);
       return 0;
     }
 
     this.play("chest-open");
-    setGlobalState({
+    useGlobalstore.setState({
       navigate: "Chest Open!",
     });
     return Phaser.Math.Between(50, 200);

@@ -1,10 +1,10 @@
-import create from "zustand/vanilla";
+import create from "zustand";
 
 interface IGlobal {
   navigate: string;
 }
 
-export const { getState: getGlobalState, setState: setGlobalState } =
-  create<IGlobal>((set, get) => ({
-    navigate: "",
-  }));
+const useGlobalstore = create<IGlobal>((set, get) => ({
+  navigate: "no knice",
+}));
+export default useGlobalstore;
