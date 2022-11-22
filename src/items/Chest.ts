@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { incfish, useBearStore } from "../utils/useBearStore";
 import useGlobalstore from "../utils/useGlobal";
 
 export default class Chest extends Phaser.Physics.Arcade.Sprite {
@@ -24,6 +25,9 @@ export default class Chest extends Phaser.Physics.Arcade.Sprite {
     useGlobalstore.setState({
       navigate: "Chest Open!",
     });
+
+    incfish(Math.floor(Math.random() * 3000));
+
     return Phaser.Math.Between(50, 200);
   }
 }
